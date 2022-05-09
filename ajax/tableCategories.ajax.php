@@ -55,19 +55,26 @@ class TableCategories{
 
 				$item = "route";
 				$value = $categories[$i]["route"];
+				$headerDescription = null;
+				$headerKeywords = null;
+				$headerImage = null;
 
 				$header = ControllerHeader::ctrViewHeader($item, $value);
+
+				$img ="<img src='views/img/cabeceras/default/default.jpg' class='img-thumbnail imgPortadaCategorias' width='100px'>";
 				
+				if(is_array($header)){
 
-				if($header["image"] !=""){
+					if($header["image"] !=""){
 
-					$img ="<img src='".$header["image"]."' class='img-thumbnail imgPortadaCategorias' width='100px'>";
+						$img ="<img src='".$header["image"]."' class='img-thumbnail imgPortadaCategorias' width='100px'>";
+						$headerDescription = $header["description"];
+						$headerKeywords = $header["keywords"];
+						$headerImage = $header["image"];
+	
+					}
 
-				}else{
-
-					$img ="<img src='views/img/cabeceras/default/default.jpg' class='img-thumbnail imgPortadaCategorias' width='100px'>";
-
-				}	
+				}
 
 				/*===================================================
 				=     REVISAR OFERTA       =
@@ -115,7 +122,7 @@ class TableCategories{
 				=============================================*/
 			
 				
-				$action = "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' idCategoria='".$categories[$i]["id"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' idCategoria='".$categories[$i]["id"]."' imgPortada='".$header["image"]."'  rutaCabecera='".$categories[$i]["route"]."' imgOferta='".$categories[$i]["offerImagen"]."'><i class='fa fa-times'></i></button></div>";
+				$action = "<div class='btn-group'><button class='btn btn-warning btnEditarCategoria' idCategoria='".$categories[$i]["id"]."' data-toggle='modal' data-target='#modalEditarCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarCategoria' idCategoria='".$categories[$i]["id"]."' imgPortada='".$headerImage."'  rutaCabecera='".$categories[$i]["route"]."' imgOferta='".$categories[$i]["offerImagen"]."'><i class='fa fa-times'></i></button></div>";
 
 				$dataJson .='
 						[
@@ -123,8 +130,8 @@ class TableCategories{
 						"'.$categories[$i]["categories"].'",
 						"'.$categories[$i]["route"].'",
 						"'.$state.'",
-						"'.$header["description"].'",
-						"'.$header["keywords"].'",
+						"'.$headerDescription.'",
+						"'.$headerKeywords.'",
 						"'.$img.'",
 						"'.$typeDiscount.'",
 						"'.$valueOffert.'",

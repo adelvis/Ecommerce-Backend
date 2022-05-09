@@ -87,18 +87,25 @@ class TableSubCategories
 
 			$item2 = "route";
 			$value2 = $subCategories[$i]["route"];
+			$headerImage = null;
+			$headerDescription = null;
+			$headerKeyword = null;
+
+
+			$img ="<img src='views/img/cabeceras/default/default.jpg' class='img-thumbnail imgPortadaSubCategorias' width='100px'>";
 
 			$header = ControllerHeader::ctrViewHeader($item2, $value2);
 
-			if($header["image"] !=""){
+			if(is_array($header)){
 
-				$img ="<img src='".$header["image"]."' class='img-thumbnail imgPortadaSubCategorias' width='100px'>";
+				if($header["image"] !=""){
+					$img ="<img src='".$header["image"]."' class='img-thumbnail imgPortadaSubCategorias' width='100px'>";
+				}
 
-			}else{
-
-				$img ="<img src='views/img/cabeceras/default/default.jpg' class='img-thumbnail imgPortadaSubCategorias' width='100px'>";
-
-			}	
+				$headerImage =$header["image"];
+				$headerDescription = $header["description"];
+				$headerKeyword = $header["keywords"];
+			}
 
 
 			/*===================================================
@@ -147,7 +154,7 @@ class TableSubCategories
   			=============================================*/
 	    
 		    
-			$action = "<div class='btn-group'><button class='btn btn-warning btnEditarSubCategoria' idSubCategoria='".$subCategories[$i]["id"]."' data-toggle='modal' data-target='#modalEditarSubCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarSubCategoria' idSubCategoria='".$subCategories[$i]["id"]."' imgPortada='".$header["image"]."'  rutaCabecera='".$subCategories[$i]["route"]."' imgOferta='".$subCategories[$i]["offerImagen"]."'><i class='fa fa-times'></i></button></div>";
+			$action = "<div class='btn-group'><button class='btn btn-warning btnEditarSubCategoria' idSubCategoria='".$subCategories[$i]["id"]."' data-toggle='modal' data-target='#modalEditarSubCategoria'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarSubCategoria' idSubCategoria='".$subCategories[$i]["id"]."' imgPortada='".$headerImage."'  rutaCabecera='".$subCategories[$i]["route"]."' imgOferta='".$subCategories[$i]["offerImagen"]."'><i class='fa fa-times'></i></button></div>";
 
 
 			$dataJson .='
@@ -157,8 +164,8 @@ class TableSubCategories
 				      "'.$category.'",
 				      "'.$subCategories[$i]["route"].'",
 				      "'.$state.'",
-				      "'.$header["description"].'",
-				      "'.$header["keywords"].'",
+				      "'.$headerDescription.'",
+				      "'.$headerKeyword.'",
 				      "'.$img.'",
 				      "'.$typeDiscount.'",
 				      "'.$valueOffert.'",

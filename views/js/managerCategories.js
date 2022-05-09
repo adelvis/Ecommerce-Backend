@@ -2,7 +2,7 @@
 CARGAR LA TABLA DINÁMICA DE CATEGORÍAS
 =============================================*/
 
-$.ajax({
+/*$.ajax({
 
 	url: "ajax/tableCategories.ajax.php",
 	success: function (respuesta) {
@@ -11,11 +11,11 @@ $.ajax({
 
 	}
 
-})
+})*/
 
 $(".tablaCategorias").DataTable({
 
-	"ajax": "ajax/tableCategories2.ajax.php",
+	"ajax": "ajax/tableCategories.ajax.php",
 	"deferRender": true,
 	"retrieve": true,
 	"processing": true,
